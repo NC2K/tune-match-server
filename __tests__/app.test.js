@@ -11,7 +11,7 @@ describe('API Routes', () => {
     return client.end();
   });
 
-  describe('/api/cats', () => {
+  describe('/api/scores', () => {
     let user;
 
     beforeAll(async () => {
@@ -22,25 +22,54 @@ describe('API Routes', () => {
         .send({
           name: 'Me the User',
           email: 'me@user.com',
+          avatar: 'image',
           password: 'password'
         });
 
       expect(response.status).toBe(200);
 
       user = response.body;
+
     });
 
     // append the token to your requests:
     //  .set('Authorization', user.token);
-    
-    it('VERB to /api/route [with context]', async () => {
-      
-      // remove this line, here to not have lint error:
-      user.token;
-    
-      // expect(response.status).toBe(200);
-      // expect(response.body).toEqual(?);
-      
+
+    let scores = [
+      {
+        id: expect.any(Number),
+        cat1: 'swing',
+        cat2: '1990s',
+        cat3: 'film score',
+        total: 19387234
+      },
+      {
+        id: expect.any(Number),
+        cat1: 'EDM',
+        cat2: 'Alternative',
+        cat3: 'Jazz',
+        total: 239580
+      },
+      {
+        id: expect.any(Number),
+        cat1: 'Serf Rock',
+        cat2: 'Country',
+        cat3: '1980s',
+        total: 1872460
+      }
+    ];
+
+    it('POST scores to /api/scores', async () => {
+
+      const response = await request
+        .post('/api/scores')
+        .set('Authorization', user.token)
+        .send(scores);
+
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual(scores);
+
+      scores = response.body;
     });
 
   });
