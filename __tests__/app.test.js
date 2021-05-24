@@ -68,16 +68,16 @@ describe('API Routes', () => {
       expect(response.status).toBe(200);
       expect(response.body).toEqual({ ...scores[0], userId: user.id });
 
-      scores = response.body;
+      //scores = response.body;
     });
 
     it('GET scores from /api/scores', async () => {
-      
+
       const response1 = await request
         .post('/api/scores')
         .set('Authorization', user.token)
         .send(scores[1]);
-     
+
       const response2 = await request
         .post('/api/scores')
         .set('Authorization', user.token)
@@ -86,13 +86,14 @@ describe('API Routes', () => {
       const response = await request
         .get('/api/scores')
         .set('Authorization', user.token);
-      
+
       expect(response.status).toBe(200);
-      expect(response.body).toEqual(expect.arrayContaining(scores));
-      expect(response1.body).toEqual(scores[1]);
-      expect(response2.body).toEqual(scores[2]);
-
-
+      expect(response1.body).toEqual({ ...scores[1], userId: user.id });
+      expect(response2.body).toEqual({ ...scores[2], userId: user.id });
+      expect(response.body).toEqual([
+        { ...scores[0], userId: user.id },
+        { ...scores[1], userId: user.id },
+        { ...scores[2], userId: user.id }]);
     });
 
 
