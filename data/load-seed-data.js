@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable no-console */
 import client from '../lib/client.js';
 // import our seed data:
@@ -13,14 +14,14 @@ async function run() {
     const data = await Promise.all(
       users.map(user => {
         return client.query(`
-          INSERT INTO users (name, icon, email, hash)
+          INSERT INTO users (name, avatar, email, hash)
           VALUES ($1, $2, $3, $4)
           RETURNING *;
         `,
-        [user.name, user.icon, user.email, user.password]);
+          [user.name, user.avatar, user.email, user.password]);
       })
     );
-    
+
     const user = data[0].rows[0];
 
     await Promise.all(
@@ -29,18 +30,18 @@ async function run() {
         INSERT INTO scores (cat1, cat2, cat3, total, user_id)
         VALUES ($1, $2, $3, $4, $5)
         `,
-        [score.cat1, score.cat2, score.cat3, score.total, user.id]);
+          [score.cat1, score.cat2, score.cat3, score.total, user.id]);
       })
     );
-    
+
 
     console.log('seed data load complete');
   }
-  catch(err) {
+  catch (err) {
     console.log(err);
   }
   finally {
     client.end();
   }
-    
+
 }
