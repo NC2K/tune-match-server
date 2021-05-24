@@ -21,8 +21,8 @@ describe('API Routes', () => {
         .post('/api/auth/signup')
         .send({
           name: 'Me the User',
-          avatar: 'image',
           email: 'me@user.com',
+          avatar: 'image',
           password: 'password'
         });
 

@@ -4,7 +4,7 @@ import client from '../lib/client.js';
 // import our seed data:
 import users from './users.js';
 import scores from './scores.js';
-
+console.log(scores);
 run();
 
 async function run() {
@@ -14,11 +14,11 @@ async function run() {
     const data = await Promise.all(
       users.map(user => {
         return client.query(`
-          INSERT INTO users (name, avatar, email, hash)
+          INSERT INTO users (name, email, avatar, hash)
           VALUES ($1, $2, $3, $4)
           RETURNING *;
         `,
-          [user.name, user.avatar, user.email, user.password]);
+          [user.name, user.email, user.avatar, user.password]);
       })
     );
 
