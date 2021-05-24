@@ -2,7 +2,7 @@
 import client from '../lib/client.js';
 // import our seed data:
 import users from './users.js';
-import cats from './cats.js';
+import scores from './scores.js';
 
 run();
 
@@ -13,23 +13,23 @@ async function run() {
     const data = await Promise.all(
       users.map(user => {
         return client.query(`
-          INSERT INTO users (name, email, hash)
-          VALUES ($1, $2, $3)
+          INSERT INTO users (name, icon, email, hash)
+          VALUES ($1, $2, $3, $4)
           RETURNING *;
         `,
-        [user.name, user.email, user.password]);
+        [user.name, user.icon, user.email, user.password]);
       })
     );
     
     const user = data[0].rows[0];
 
     await Promise.all(
-      cats.map(cat => {
+      scores.map(score => {
         return client.query(`
-        INSERT INTO cats (name, type, url, year, lives, is_sidekick, user_id)
-        VALUES ($1, $2, $3, $4, $5, $6, $7)
+        INSERT INTO scores (cat1, cat2, cat3, total, user_id)
+        VALUES ($1, $2, $3, $4, $5)
         `,
-        [cat.name, cat.type, cat.url, cat.year, cat.lives, cat.isSidekick, user.id]);
+        [score.cat1, score.cat2, score.cat3, score.total, user.id]);
       })
     );
     
