@@ -64,10 +64,10 @@ describe('API Routes', () => {
       const response = await request
         .post('/api/scores')
         .set('Authorization', user.token)
-        .send(scores);
+        .send(scores[0]);
 
       expect(response.status).toBe(200);
-      expect(response.body).toEqual(scores);
+      expect(response.body).toEqual({ ...scores[0], userId: user.id });
 
       scores = response.body;
     });
