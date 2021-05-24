@@ -30,7 +30,6 @@ describe('API Routes', () => {
 
       user = response.body;
 
-      console.log(user);
     });
 
     // append the token to your requests:

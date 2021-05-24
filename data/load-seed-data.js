@@ -4,7 +4,7 @@ import client from '../lib/client.js';
 // import our seed data:
 import users from './users.js';
 import scores from './scores.js';
-console.log(scores);
+
 run();
 
 async function run() {
