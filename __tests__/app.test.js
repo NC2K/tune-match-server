@@ -59,6 +59,16 @@ describe('API Routes', () => {
       }
     ];
 
+    let search = [
+      {
+        title: 'Undefined',
+        artist: 'As I Lay Dying',
+        song: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview62/v4/9f/50/3b/9f503b23-103d-d13c-7158-1fdec40863c9/mzaf_6167983806281645.plus.aac.p.m4a',
+        albumArt: 'https://is2-ssl.mzstatic.com/image/thumb/Music/v4/24/b0/ef/24b0efad-2aa0-bc5f-ddcc-73003c68f216/source/60x60bb.jpg',
+        genre: 'Rock'
+      }
+    ];
+
     it('POST scores to /api/scores', async () => {
       const response = await request
         .post('/api/scores')
@@ -96,14 +106,13 @@ describe('API Routes', () => {
         { ...scores[2], userId: user.id }]);
     });
 
-    it('GET album from /api/categories/${collectionId}', async() => {
+    it('GET album from /api/categories/:search', async() => {
       const response = await request
-        .get(`/api/categories/${collectionId}`)
+        .get('/api/categories/jazz')
         .set('Authorization', user.token);
 
       expect(response.status).toBe(200);
-      expect(response.body).toEqual();
+      expect(response.body).toEqual(search);
     });
-
   });
 });
