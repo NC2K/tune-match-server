@@ -59,6 +59,7 @@ describe('API Routes', () => {
       }
     ];
 
+   
     it('POST scores to /api/scores', async () => {
       const response = await request
         .post('/api/scores')
@@ -96,14 +97,16 @@ describe('API Routes', () => {
         { ...scores[2], userId: user.id }]);
     });
 
-    it('GET album from /api/categories/${collectionId}', async() => {
+    it('GET album from /api/categories/:search', async() => {
       const response = await request
-        .get(`/api/categories/${collectionId}`)
+        .get(`/api/categories/${req.params.search}`)
         .set('Authorization', user.token);
 
       expect(response.status).toBe(200);
-      expect(response.body).toEqual();
+      expect(response.body).toEqual(req.params.search);
     });
+
+
 
   });
 });
