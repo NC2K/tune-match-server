@@ -10,7 +10,7 @@ describe('API Data Munging', () => {
     genre: 'Pop'
   }];
 
-  test.only('munges data', () => {
+  test('munges data', () => {
     const output = mungeSearch(categories);
     expect(output).toEqual(expectedSearch);
   });
