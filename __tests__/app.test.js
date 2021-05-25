@@ -96,7 +96,14 @@ describe('API Routes', () => {
         { ...scores[2], userId: user.id }]);
     });
 
+    it('GET album from /api/categories/${collectionId}', async() => {
+      const response = await request
+        .get(`/api/categories/${collectionId}`)
+        .set('Authorization', user.token);
 
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual();
+    });
 
   });
 });
