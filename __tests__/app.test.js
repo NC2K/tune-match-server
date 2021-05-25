@@ -78,7 +78,7 @@ describe('API Routes', () => {
       expect(response.status).toBe(200);
       expect(response.body).toEqual({ ...scores[0], userId: user.id });
 
-      //scores = response.body;
+      scores[0] = response.body;
     });
 
     it('GET scores from /api/scores', async () => {
@@ -88,10 +88,14 @@ describe('API Routes', () => {
         .set('Authorization', user.token)
         .send(scores[1]);
 
+      scores[1] = response1.body; 
+
       const response2 = await request
         .post('/api/scores')
         .set('Authorization', user.token)
         .send(scores[2]);
+
+      scores[2] = response2.body; 
 
       const response = await request
         .get('/api/scores')
@@ -105,6 +109,20 @@ describe('API Routes', () => {
         { ...scores[1], userId: user.id },
         { ...scores[2], userId: user.id }]);
     });
+
+    it('PUT scores to /api/scores/:id', async () => {
+      scores[0].total = 500;
+
+      const response = await request
+        .put(`/api/scores/${scores[0].id}`)
+        .set('Authorization', user.token)
+        .send(scores[0]);
+
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual(scores[0]);
+    });
+
+
 
     it('GET album from /api/categories/:search', async() => {
       const response = await request
