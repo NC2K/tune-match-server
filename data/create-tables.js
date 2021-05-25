@@ -13,7 +13,7 @@ async function run() {
       CREATE TABLE users (
         id SERIAL PRIMARY KEY NOT NULL,
         name VARCHAR(512) NOT NULL,
-        icon VARCHAR(512) NOT NULL,
+        avatar VARCHAR(512),
         email VARCHAR(512) NOT NULL,
         hash VARCHAR(512) NOT NULL
       );
@@ -30,7 +30,7 @@ async function run() {
 
     console.log('create tables complete');
   }
-  catch(err) {
+  catch (err) {
     // problem? let's see the error...
     console.log(err);
   }
