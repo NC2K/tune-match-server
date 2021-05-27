@@ -24,9 +24,10 @@ async function run() {
         cat2 VARCHAR(512),
         cat3 VARCHAR(512),
         total INTEGER NOT NULL,
+        u_name VARCHAR(512),
         user_id INTEGER NOT NULL REFERENCES users(id)
-      );
-    `);
+        );
+        `);
 
     console.log('create tables complete');
   }

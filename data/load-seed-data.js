@@ -27,10 +27,10 @@ async function run() {
     await Promise.all(
       scores.map(score => {
         return client.query(`
-        INSERT INTO scores (cat1, cat2, cat3, total, user_id)
-        VALUES ($1, $2, $3, $4, $5)
+        INSERT INTO scores (cat1, cat2, cat3, total, u_name, user_id)
+        VALUES ($1, $2, $3, $4, $5, $6)
         `,
-          [score.cat1, score.cat2, score.cat3, score.total, user.id]);
+          [score.cat1, score.cat2, score.cat3, score.total, user.name, user.id]);
       })
     );
 

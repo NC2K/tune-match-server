@@ -41,21 +41,24 @@ describe('API Routes', () => {
         cat1: 'swing',
         cat2: '1990s',
         cat3: 'film score',
-        total: 19387234
+        total: 19387234,
+        uName: expect.any(String)
       },
       {
         id: expect.any(Number),
         cat1: 'EDM',
         cat2: 'Alternative',
         cat3: 'Jazz',
-        total: 239580
+        total: 239580,
+        uName: expect.any(String)
       },
       {
         id: expect.any(Number),
         cat1: 'Serf Rock',
         cat2: 'Country',
         cat3: '1980s',
-        total: 1872460
+        total: 1872460,
+        uName: expect.any(String)
       }
     ];
 
@@ -88,14 +91,14 @@ describe('API Routes', () => {
         .set('Authorization', user.token)
         .send(scores[1]);
 
-      scores[1] = response1.body; 
+      scores[1] = response1.body;
 
       const response2 = await request
         .post('/api/scores')
         .set('Authorization', user.token)
         .send(scores[2]);
 
-      scores[2] = response2.body; 
+      scores[2] = response2.body;
 
       const response = await request
         .get('/api/scores')
@@ -124,7 +127,7 @@ describe('API Routes', () => {
 
 
 
-    it('GET album from /api/categories/:search', async() => {
+    it('GET album from /api/categories/:search', async () => {
       const response = await request
         .get('/api/categories/jazz')
         .set('Authorization', user.token);
