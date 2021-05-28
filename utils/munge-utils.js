@@ -1,6 +1,5 @@
 export function mungeSearch(arr) {
-    
-  return arr.map(data => {
+  return arr.results.map(data => {
     return {
       title: data.trackName,
       artist: data.artistName,
