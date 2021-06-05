@@ -24,7 +24,7 @@ async function run() {
         cat2 VARCHAR(512),
         cat3 VARCHAR(512),
         total INTEGER NOT NULL,
-        u_name VARCHAR(512),
+        u_name VARCHAR(512), -- don't repeat values, join to the user table
         user_id INTEGER NOT NULL REFERENCES users(id)
         );
         `);
